@@ -17,7 +17,7 @@ public class CountriesController {
     private final CountriesService countriesService;
 
     @GetMapping("/all")
-    public List<Countries> allColors(){
+    public List<Countries> allColors() {
         return countriesService.countries();
     }
 }

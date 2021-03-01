@@ -5,10 +5,10 @@ import online.shop.onlineshop.exception.ResourceNotFoundException;
 import online.shop.onlineshop.model.Product;
 import online.shop.onlineshop.model.ShoppingCart;
 import online.shop.onlineshop.model.User;
+import online.shop.onlineshop.repository.ProductRepository;
 import online.shop.onlineshop.repository.ShoppingCartRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -17,20 +17,15 @@ import java.util.List;
 public class ShoppingCartService {
 
     private final ShoppingCartRepository shoppingCartRepository;
+    private final ProductRepository productRepository;
 
-    public ShoppingCart save(ShoppingCart shoppingCart) {
-        List<Double> prices = new ArrayList<>();
-        if (shoppingCart.getProducts() != null) {
-            for (Product product : shoppingCart.getProducts()) {
-                prices.add(product.getPrice());
-            }
-            double sum = prices.stream()
-                    .mapToDouble(Double::doubleValue)
-                    .sum();
-            shoppingCart.setCartTotal(sum);
-        }
-
-        return shoppingCartRepository.save(shoppingCart);
+    public ShoppingCart update(int id, int productId) {
+        ShoppingCart cart = shoppingCartRepository.getOne(id);
+        Product product = productRepository.getOne(productId);
+        List<Product> products = cart.getProducts();
+        products.add(product);
+        cart.setProducts(products);
+        return shoppingCartRepository.save(cart);
     }
 
     public ShoppingCart getOne(int id) {
@@ -43,4 +38,7 @@ public class ShoppingCartService {
     }
 
 
+    public ShoppingCart save(ShoppingCart shoppingCart) {
+        return shoppingCartRepository.save(shoppingCart);
+    }
 }

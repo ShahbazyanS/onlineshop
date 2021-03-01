@@ -46,11 +46,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //User security config
                 .antMatchers(HttpMethod.GET, "/user/activate").permitAll()
                 .antMatchers(HttpMethod.POST, "/user/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/user/**").hasAnyAuthority( "ADMIN")
-                .antMatchers(HttpMethod.GET, "/user/get").hasAnyAuthority("USER","ADMIN")
-                .antMatchers(HttpMethod.PUT, "/user/**").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.GET, "/user/get").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/user/delete").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/user/delete/**").hasAnyAuthority( "ADMIN")
+                .antMatchers(HttpMethod.GET, "/user/**").hasAnyAuthority("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/user/**").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/user/delete/**").hasAnyAuthority("ADMIN")
 
                 //Personal Info security config
                 .antMatchers(HttpMethod.POST, "/personal_info/**").hasAnyAuthority("USER", "ADMIN")
@@ -92,7 +92,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll();
 
 
-
         // Custom JWT based security filter
         http
                 .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
@@ -100,7 +99,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // disable page caching
         http.headers().cacheControl();
     }
-
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -118,6 +116,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public JwtAuthenticationTokenFilter authenticationTokenFilterBean() throws Exception {
         return new JwtAuthenticationTokenFilter();
     }
-
-
 }

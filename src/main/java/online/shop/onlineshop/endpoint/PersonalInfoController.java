@@ -15,14 +15,6 @@ public class PersonalInfoController {
 
     private final PersonalInfoService personalInfoService;
 
-    @PostMapping("/add")
-    public PersonalInfo save(@RequestBody PersonalInfo personalInfo, @AuthenticationPrincipal CurrentUser currentUser) {
-        User user = currentUser.getUser();
-        personalInfo.setName(user.getUsername());
-        personalInfo.setEmail(user.getEmail());
-        return personalInfoService.save(personalInfo);
-    }
-
     @PutMapping("/edit/{id}")
     public PersonalInfo update(@RequestBody PersonalInfo personalInfo, @PathVariable("id") int id) {
         return personalInfoService.update(personalInfo, id);
@@ -34,7 +26,7 @@ public class PersonalInfoController {
     }
 
     @GetMapping("/get")
-    public PersonalInfo getPI(@AuthenticationPrincipal CurrentUser currentUser){
+    public PersonalInfo getPI(@AuthenticationPrincipal CurrentUser currentUser) {
         return personalInfoService.getPI(currentUser.getUser().getEmail());
     }
 }

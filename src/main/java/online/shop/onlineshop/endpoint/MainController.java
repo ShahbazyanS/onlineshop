@@ -20,12 +20,12 @@ public class MainController {
     private final ProductService productService;
 
     @GetMapping("/categories")
-    public List<Category> categories(){
+    public List<Category> categories() {
         return categoryService.generalCategories();
     }
 
     @GetMapping("/products")
-    public List<Product> products(){
+    public List<Product> products() {
         return productService.lastProducts();
     }
 }

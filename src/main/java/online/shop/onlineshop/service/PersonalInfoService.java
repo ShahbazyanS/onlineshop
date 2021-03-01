@@ -3,6 +3,7 @@ package online.shop.onlineshop.service;
 import lombok.RequiredArgsConstructor;
 import online.shop.onlineshop.exception.ResourceNotFoundException;
 import online.shop.onlineshop.model.PersonalInfo;
+import online.shop.onlineshop.model.User;
 import online.shop.onlineshop.repository.PersonalInfoRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +14,15 @@ public class PersonalInfoService {
 
     private final PersonalInfoRepository personalInfoRepository;
 
-    public PersonalInfo save(PersonalInfo personalInfo){
+    public PersonalInfo save(PersonalInfo personalInfo, User user){
+        personalInfo.setName(user.getUsername());
+        personalInfo.setEmail(user.getEmail());
         return personalInfoRepository.save(personalInfo);
     }
 
     public PersonalInfo update(PersonalInfo personalInfo, int id){
-        PersonalInfo personalInfo1 = personalInfoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource by id " + id + " does not exist"));
+        PersonalInfo personalInfo1 = personalInfoRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Resource by id " + id + " does not exist"));
 
         personalInfo1.setName(personalInfo.getName());
         personalInfo1.setEmail(personalInfo.getEmail());

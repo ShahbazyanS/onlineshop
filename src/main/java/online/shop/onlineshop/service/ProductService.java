@@ -7,9 +7,7 @@ import online.shop.onlineshop.model.Product;
 import online.shop.onlineshop.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -39,13 +37,7 @@ public class ProductService {
     }
 
     public List<Product> findByCategoryRandom(int id) {
-        List<Product> products = new ArrayList<>();
-        List<Product> byCategory = productRepository.findByCategory(id);
-        for (int i = 0; i < 6; i++) {
-            Product product = byCategory.get(new Random().nextInt(byCategory.size()));
-            products.add(product);
-        }
-        return products;
+      return productRepository.randomProducts(id);
     }
 
     public List<Product> findByColors(int id) {
@@ -77,19 +69,20 @@ public class ProductService {
     }
 
     public Product update(Product product, int id) {
-        Product product1 = productRepository.findById(id).orElseThrow(
+        Product productDB = productRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Product with id " + id + " does not exist"));
-        product1.setName(product.getName());
-        product1.setImages(product.getImages());
-        product1.setColors(product.getColors());
-        product1.setCountries(product.getCountries());
-        product1.setPrice(product.getPrice());
-        product1.setDescription(product.getDescription());
-        product1.setSizes(product.getSizes());
-        return product1;
+        product.setId(productDB.getId());
+//        productDB.setName(product.getName());
+//        productDB.setImages(product.getImages());
+//        productDB.setColors(product.getColors());
+//        productDB.setCountries(product.getCountries());
+//        productDB.setPrice(product.getPrice());
+//        productDB.setDescription(product.getDescription());
+//        productDB.setSizes(product.getSizes());
+        return productDB;
     }
 
-    public void delete(int id){
+    public void delete(int id) {
         Product product = productRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Product with id " + id + " does not exist"));
         productRepository.delete(product);

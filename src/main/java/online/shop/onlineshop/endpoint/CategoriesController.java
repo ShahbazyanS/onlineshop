@@ -17,13 +17,13 @@ public class CategoriesController {
 
     private final CategoryService categoryService;
 
-    @GetMapping("/general/categories")
-    public List<Category> allCategories(){
+    @GetMapping("/general")
+    public List<Category> allCategories() {
         return categoryService.generalCategories();
     }
 
-    @GetMapping("/categories/{id}")
-    public List<Category> categories(@PathVariable("id") int id){
+    @GetMapping("/get/{id}")
+    public List<Category> categories(@PathVariable("id") int id) {
         return categoryService.findById(id);
     }
 }

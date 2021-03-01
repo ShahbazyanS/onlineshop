@@ -33,7 +33,6 @@ public class UserController {
     private final EmailService emailService;
 
 
-
     @PostMapping("/add")
     public User save(@RequestBody UserDto userDto, Locale locale) throws MessagingException {
         if (userDto.getPassword().equals(userDto.getConfirmPassword())) {

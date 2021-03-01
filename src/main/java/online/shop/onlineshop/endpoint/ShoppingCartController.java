@@ -14,25 +14,21 @@ public class ShoppingCartController {
 
     private final ShoppingCartService shoppingCartService;
 
-    @PostMapping("/add")
-    public ShoppingCart save(@RequestBody ShoppingCart shoppingCart, @AuthenticationPrincipal CurrentUser currentUser){
-        currentUser.getUser().setShoppingCart(shoppingCart);
-        return shoppingCartService.save(shoppingCart);
-    }
 
     @GetMapping("/get/{id}")
-    public ShoppingCart getOne(@PathVariable("id") int id){
+    public ShoppingCart getOne(@PathVariable("id") int id) {
 
         return shoppingCartService.getOne(id);
     }
 
-    @PutMapping("/update/{id}")
-    public ShoppingCart update(@RequestBody ShoppingCart shoppingCart, @PathVariable("id") int id){
-        return shoppingCartService.save(shoppingCart);
+    @PutMapping("/update/{product_id}")
+    public ShoppingCart update(@PathVariable(value = "product_id") int productId,
+                               @AuthenticationPrincipal CurrentUser user) {
+        return shoppingCartService.update(user.getUser().getShoppingCart().getId(), productId);
     }
 
     @GetMapping("/user/cart")
-    public ShoppingCart cartByUser(@AuthenticationPrincipal CurrentUser currentUser){
+    public ShoppingCart cartByUser(@AuthenticationPrincipal CurrentUser currentUser) {
         return shoppingCartService.userCart(currentUser.getUser());
     }
 }

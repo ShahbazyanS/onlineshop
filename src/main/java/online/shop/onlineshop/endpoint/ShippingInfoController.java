@@ -14,11 +14,6 @@ public class ShippingInfoController {
 
     private final ShippingInfoService shippingInfoService;
 
-    @PostMapping("/add")
-    public ShippingInfo save(@RequestBody ShippingInfo shippingInfo, @AuthenticationPrincipal CurrentUser currentUser) {
-        return shippingInfoService.save(shippingInfo, currentUser.getUser());
-    }
-
     @PutMapping("/update")
     public ShippingInfo update(@RequestBody ShippingInfo shippingInfo, @AuthenticationPrincipal CurrentUser currentUser) {
         int id = currentUser.getUser().getShippingInfo().getId();

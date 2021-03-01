@@ -1,13 +1,13 @@
 package online.shop.onlineshop.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -28,10 +28,13 @@ public class User {
     private PersonalInfo personalInfo;
     @OneToOne
     private ShippingInfo shippingInfo;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "cart_id")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "shopping_cart_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private ShoppingCart shoppingCart;
     @OneToOne
     private Order order;
     private String token;
+
+
 }

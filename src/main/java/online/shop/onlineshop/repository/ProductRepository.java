@@ -59,4 +59,10 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Query(value = "SELECT * FROM products WHERE `name` LIKE %:word% OR description LIKE %:word%", nativeQuery = true)
     List<Product> searchProduct(@Param("word") String word);
+
+    @Query(value = "SELECT * FROM products INNER JOIN `categories_products`\n" +
+            "            ON `categories_products`.products_id=products.id\n" +
+            "            WHERE `categories_products`.categories_id=:id\n" +
+            "             ORDER BY RAND() LIMIT 6\n", nativeQuery = true)
+    List<Product> randomProducts(@Param("id") int id);
 }

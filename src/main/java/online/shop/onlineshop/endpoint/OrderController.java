@@ -14,12 +14,6 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    @PostMapping("/save")
-    public Order save(@RequestBody Order order, @AuthenticationPrincipal CurrentUser currentUser){
-        currentUser.getUser().setOrder(order);
-        return orderService.save(order);
-    }
-
     @PutMapping("/update")
     public Order update(@RequestBody Order order, @AuthenticationPrincipal CurrentUser currentUser){
         int id = currentUser.getUser().getOrder().getId();
