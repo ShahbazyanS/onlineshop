@@ -3,7 +3,7 @@ package online.shop.onlineshop.endpoint;
 import lombok.RequiredArgsConstructor;
 import online.shop.onlineshop.model.ShoppingCart;
 import online.shop.onlineshop.security.CurrentUser;
-import online.shop.onlineshop.service.ShoppingCartService;
+import online.shop.onlineshop.service.ShoppingCartServiceImpl;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/shopping_cart")
 public class ShoppingCartController {
 
-    private final ShoppingCartService shoppingCartService;
+    private final ShoppingCartServiceImpl shoppingCartService;
 
 
     @GetMapping("/{id}")

@@ -1,8 +1,10 @@
 package online.shop.onlineshop.endpoint;
 
 import lombok.RequiredArgsConstructor;
+import online.shop.onlineshop.dto.ProductDto;
 import online.shop.onlineshop.model.Product;
-import online.shop.onlineshop.service.ProductService;
+import online.shop.onlineshop.service.ProductServiceImpl;
+import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,10 +14,13 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
 
-    private final ProductService productService;
+    private final ProductServiceImpl productService;
+    private final ModelMapper modelMapper;
+
 
     @PostMapping("/add")
-    public Product save(@RequestBody Product product) {
+    public Product save(@RequestBody ProductDto productDto) {
+        Product product = modelMapper.map(productDto, Product.class);
         return productService.saveProduct(product);
     }
 

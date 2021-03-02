@@ -3,7 +3,7 @@ package online.shop.onlineshop.endpoint;
 import lombok.RequiredArgsConstructor;
 import online.shop.onlineshop.model.Order;
 import online.shop.onlineshop.security.CurrentUser;
-import online.shop.onlineshop.service.OrderService;
+import online.shop.onlineshop.service.OrderServiceImpl;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/order")
 public class OrderController {
 
-    private final OrderService orderService;
+    private final OrderServiceImpl orderService;
 
     @PutMapping("/update")
     public Order update(@RequestBody Order order, @AuthenticationPrincipal CurrentUser currentUser){

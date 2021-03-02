@@ -2,9 +2,8 @@ package online.shop.onlineshop.endpoint;
 
 import lombok.RequiredArgsConstructor;
 import online.shop.onlineshop.model.PersonalInfo;
-import online.shop.onlineshop.model.User;
 import online.shop.onlineshop.security.CurrentUser;
-import online.shop.onlineshop.service.PersonalInfoService;
+import online.shop.onlineshop.service.PersonalInfoServiceImpl;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("personal_info")
 public class PersonalInfoController {
 
-    private final PersonalInfoService personalInfoService;
+    private final PersonalInfoServiceImpl personalInfoService;
 
     @PutMapping("/edit/{id}")
     public PersonalInfo update(@RequestBody PersonalInfo personalInfo, @PathVariable("id") int id) {

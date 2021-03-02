@@ -3,7 +3,7 @@ package online.shop.onlineshop.endpoint;
 import lombok.RequiredArgsConstructor;
 import online.shop.onlineshop.model.ShippingInfo;
 import online.shop.onlineshop.security.CurrentUser;
-import online.shop.onlineshop.service.ShippingInfoService;
+import online.shop.onlineshop.service.ShippingInfoServiceImpl;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/address")
 public class ShippingInfoController {
 
-    private final ShippingInfoService shippingInfoService;
+    private final ShippingInfoServiceImpl shippingInfoService;
 
     @PutMapping("/update")
     public ShippingInfo update(@RequestBody ShippingInfo shippingInfo, @AuthenticationPrincipal CurrentUser currentUser) {

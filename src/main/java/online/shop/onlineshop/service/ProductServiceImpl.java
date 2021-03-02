@@ -1,39 +1,98 @@
 package online.shop.onlineshop.service;
 
+
+import lombok.RequiredArgsConstructor;
 import online.shop.onlineshop.exception.ResourceNotFoundException;
 import online.shop.onlineshop.model.Product;
+import online.shop.onlineshop.repository.ProductRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public interface ProductServiceImpl {
+@Service
+@RequiredArgsConstructor
+public class ProductServiceImpl implements ProductService {
 
-    public Product saveProduct(Product product);
+    private final ProductRepository productRepository;
 
-    public List<Product> allProducts();
+    @Override
+    public Product saveProduct(Product product) {
+        return productRepository.save(product);
+    }
 
-    public List<Product> lastProducts();
+    @Override
+    public List<Product> allProducts() {
+        return productRepository.findAll();
+    }
 
-    public Product getOne(int id);
+    @Override
+    public List<Product> lastProducts() {
+        return productRepository.findLastProducts();
+    }
 
-    public List<Product> findByCategory(int id);
+    @Override
+    public Product getOne(int id) {
+        return productRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Product with id " + id + " does not exist"));
+    }
 
-    public List<Product> findByCategoryRandom(int id);
+    @Override
+    public List<Product> findByCategory(int id) {
+        return productRepository.findByCategory(id);
+    }
 
-    public List<Product> findByColors(int id);
+    @Override
+    public List<Product> findByCategoryRandom(int id) {
+      return productRepository.randomProducts(id);
+    }
 
-    public List<Product> findBySizes(int id);
+    @Override
+    public List<Product> findByColors(int id) {
+        return productRepository.findByColors(id);
+    }
 
-    public List<Product> findByCountries(int id);
+    @Override
+    public List<Product> findBySizes(int id) {
+        return productRepository.findBySizes(id);
+    }
 
-    public List<Product> filterByPrice(int min, int max);
+    @Override
+    public List<Product> findByCountries(int id) {
+        return productRepository.findByCountries(id);
+    }
 
-    public List<Product> filterByPriceAndCountries(int id, int min, int max);
+    @Override
+    public List<Product> filterByPrice(int min, int max) {
+        return productRepository.filterByPrice(min, max);
+    }
 
-    public List<Product> filterByPriceAndCategories(int id, int min, int max);
+    @Override
+    public List<Product> filterByPriceAndCountries(int id, int min, int max) {
+        return productRepository.filterByPriceAndCountries(id, min, max);
+    }
 
-    public List<Product> searchProduct(String word);
+    @Override
+    public List<Product> filterByPriceAndCategories(int id, int min, int max) {
+        return productRepository.filterByPriceAndCategories(id, min, max);
+    }
 
-    public Product update(Product product, int id);
+    @Override
+    public List<Product> searchProduct(String word) {
+        return productRepository.searchProduct(word);
+    }
 
-    public void delete(int id);
+    @Override
+    public Product update(Product product, int id) {
+        Product productDB = productRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Product with id " + id + " does not exist"));
+        product.setId(productDB.getId());
+        return productDB;
+    }
+
+    @Override
+    public void delete(int id) {
+        Product product = productRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Product with id " + id + " does not exist"));
+        productRepository.delete(product);
+    }
 }

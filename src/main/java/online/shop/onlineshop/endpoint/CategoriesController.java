@@ -2,7 +2,7 @@ package online.shop.onlineshop.endpoint;
 
 import lombok.RequiredArgsConstructor;
 import online.shop.onlineshop.model.Category;
-import online.shop.onlineshop.service.CategoryService;
+import online.shop.onlineshop.service.CategoryServiceImpl;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/category")
 public class CategoriesController {
 
-    private final CategoryService categoryService;
+    private final CategoryServiceImpl categoryService;
 
     @GetMapping("/general")
     public List<Category> allCategories() {

@@ -1,51 +1,17 @@
 package online.shop.onlineshop.service;
 
-import lombok.RequiredArgsConstructor;
-import online.shop.onlineshop.exception.ResourceNotFoundException;
 import online.shop.onlineshop.model.PersonalInfo;
 import online.shop.onlineshop.model.User;
-import online.shop.onlineshop.repository.PersonalInfoRepository;
-import org.springframework.stereotype.Service;
 
+public interface PersonalInfoService {
 
-@Service
-@RequiredArgsConstructor
-public class PersonalInfoService implements PersonalInfoServiceImpl{
+    PersonalInfo save(PersonalInfo personalInfo, User user);
 
-    private final PersonalInfoRepository personalInfoRepository;
+    PersonalInfo update(PersonalInfo personalInfo, int id);
 
-    @Override
-    public PersonalInfo save(PersonalInfo personalInfo, User user){
-        personalInfo.setName(user.getUsername());
-        personalInfo.setEmail(user.getEmail());
-        return personalInfoRepository.save(personalInfo);
-    }
+    PersonalInfo findById(int id);
 
-    @Override
-    public PersonalInfo update(PersonalInfo personalInfo, int id){
-        PersonalInfo personalInfo1 = personalInfoRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Resource by id " + id + " does not exist"));
+    void delete(int id);
 
-        personalInfo1.setName(personalInfo.getName());
-        personalInfo1.setEmail(personalInfo.getEmail());
-        personalInfo1.setPhone(personalInfo.getPhone());
-
-        return personalInfoRepository.save(personalInfo1);
-    }
-
-    @Override
-    public PersonalInfo findById(int id){
-        return personalInfoRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Personal info by id " + id + " does not exist"));
-    }
-
-    @Override
-    public void delete(int id){
-        personalInfoRepository.deleteById(id);
-    }
-
-    @Override
-    public PersonalInfo getPI(String email){
-        return personalInfoRepository.findByEmail(email);
-    }
+    PersonalInfo getPI(String email);
 }

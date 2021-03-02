@@ -7,8 +7,8 @@ import online.shop.onlineshop.dto.UserDto;
 import online.shop.onlineshop.model.User;
 import online.shop.onlineshop.security.CurrentUser;
 import online.shop.onlineshop.security.JwtTokenUtil;
-import online.shop.onlineshop.service.EmailService;
-import online.shop.onlineshop.service.UserService;
+import online.shop.onlineshop.service.EmailServiceImpl;
+import online.shop.onlineshop.service.UserServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,11 +26,11 @@ import java.util.UUID;
 @RequestMapping("/user")
 public class UserController {
 
-    private final UserService userService;
+    private final UserServiceImpl userService;
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
     private final JwtTokenUtil jwtTokenUtil;
-    private final EmailService emailService;
+    private final EmailServiceImpl emailService;
 
 
     @PostMapping("/add")
