@@ -22,12 +22,14 @@ public class ShoppingCart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private double cartTotal;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinTable(name = "shopping_cart_products",
             joinColumns = {@JoinColumn(name = "shopping_cart_id")},
             inverseJoinColumns = {@JoinColumn(name = "products_id")})
     private List<Product> products;
+
     @OneToOne
     @JsonIgnore
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

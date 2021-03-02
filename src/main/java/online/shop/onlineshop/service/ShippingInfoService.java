@@ -9,26 +9,26 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class ShippingInfoService {
+public class ShippingInfoService implements ShippingInfoServiceImpl{
 
     private final ShippingInfoRepository shippingInfoRepository;
 
-
+    @Override
     public ShippingInfo save(ShippingInfo shippingInfo, User user) {
         user.setShippingInfo(shippingInfo);
         return shippingInfoRepository.save(shippingInfo);
     }
 
+    @Override
     public ShippingInfo update(ShippingInfo shippingInfo, int id) {
-        ShippingInfo shippingInfo1 = shippingInfoRepository.findById(id).orElseThrow(
+        ShippingInfo shippingInfoDB = shippingInfoRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Sipping Info with id " + id + " does not exist"));
-        shippingInfo1.setAddressLine(shippingInfo.getAddressLine());
-        shippingInfo1.setCity(shippingInfo.getCity());
-        shippingInfo1.setCountry(shippingInfo.getCountry());
-        return shippingInfo1;
+        shippingInfo.setId(shippingInfoDB.getId());
+        return shippingInfoDB;
     }
 
-    public ShippingInfo findById(int id){
+    @Override
+    public ShippingInfo findById(int id) {
         return shippingInfoRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Sipping Info with id " + id + " does not exist"));
     }

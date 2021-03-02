@@ -9,15 +9,17 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class CategoryService {
+public class CategoryService implements CategoryServiceImpl{
 
     private final CategoryRepository categoryRepository;
 
+    @Override
     public List<Category> generalCategories(){
         return categoryRepository.getGeneralCategories();
     }
 
+    @Override
     public List<Category> findById(int id){
-        return categoryRepository.findCategories(id);
+        return categoryRepository.findAllById(id);
     }
 }

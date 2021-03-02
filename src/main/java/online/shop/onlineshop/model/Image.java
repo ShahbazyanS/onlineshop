@@ -1,6 +1,5 @@
 package online.shop.onlineshop.model;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,12 +12,14 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "countries")
-public class Countries {
+@Table(name = "images")
+public class Image {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-
+    @ManyToOne
+    @JoinColumn(name = "products_id", nullable = false)
+    private Product product;
 }

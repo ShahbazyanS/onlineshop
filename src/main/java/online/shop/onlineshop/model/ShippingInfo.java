@@ -14,12 +14,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "shipping_info")
 public class ShippingInfo {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String country;
     private String city;
     private String addressLine;
-
 }

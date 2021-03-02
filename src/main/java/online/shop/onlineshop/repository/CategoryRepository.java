@@ -3,7 +3,6 @@ package online.shop.onlineshop.repository;
 import online.shop.onlineshop.model.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,7 +14,6 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
     nativeQuery = true)
     List<Category> getGeneralCategories();
 
-    @Query(value = "SELECT * FROM categories WHERE category_id =:id", nativeQuery = true)
-    List<Category> findCategories(@Param("id") int id);
+    List<Category> findAllById(int id);
 
 }

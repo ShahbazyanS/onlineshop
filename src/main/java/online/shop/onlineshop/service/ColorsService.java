@@ -1,7 +1,7 @@
 package online.shop.onlineshop.service;
 
 import lombok.RequiredArgsConstructor;
-import online.shop.onlineshop.model.Colors;
+import online.shop.onlineshop.model.Color;
 import online.shop.onlineshop.repository.ColorsRepository;
 import org.springframework.stereotype.Service;
 
@@ -9,11 +9,12 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ColorsService {
+public class ColorsService implements ColorsServiceImpl {
 
     private final ColorsRepository colorsRepository;
 
-    public List<Colors> colors(){
+    @Override
+    public List<Color> colors(){
         return colorsRepository.findAll();
     }
 }

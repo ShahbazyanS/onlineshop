@@ -24,27 +24,27 @@ public class ProductController {
         return productService.getOne(id);
     }
 
-    @GetMapping("/get")
+    @GetMapping("/all")
     public List<Product> getAllProducts() {
         return productService.allProducts();
     }
 
-    @GetMapping("/by_category/{id}")
+    @GetMapping("/category/{id}")
     public List<Product> findByCategory(@PathVariable("id") int id) {
         return productService.findByCategory(id);
     }
 
-    @GetMapping("/by_colors/{id}")
+    @GetMapping("/colors/{id}")
     public List<Product> findByColor(@PathVariable("id") int id) {
         return productService.findByColors(id);
     }
 
-    @GetMapping("/by_sizes/{id}")
+    @GetMapping("/sizes/{id}")
     public List<Product> findBySizes(@PathVariable("id") int id) {
         return productService.findBySizes(id);
     }
 
-    @GetMapping("/made_in/{id}")
+    @GetMapping("/madein/{id}")
     public List<Product> findByCountries(@PathVariable("id") int id) {
         return productService.findByCountries(id);
     }
@@ -54,12 +54,12 @@ public class ProductController {
         return productService.filterByPrice(min, max);
     }
 
-    @GetMapping("/filter/made_in_price/{id}/{min}/{max}")
+    @GetMapping("/filter/madeinAndPrice/{id}/{min}/{max}")
     public List<Product> filterByMadeInAndPrice(@PathVariable("id") int id, @PathVariable("min") int min, @PathVariable("max") int max) {
         return productService.filterByPriceAndCountries(id, min, max);
     }
 
-    @GetMapping("/filter/categories_price/{id}/{min}/{max}")
+    @GetMapping("/filter/categoriesAndPrice/{id}/{min}/{max}")
     public List<Product> filterByCategoriesAndPrice(@PathVariable("id") int id, @PathVariable("min") int min, @PathVariable("max") int max) {
         return productService.filterByPriceAndCategories(id, min, max);
     }
@@ -69,7 +69,7 @@ public class ProductController {
         return productService.searchProduct(word);
     }
 
-    @GetMapping("/random_categories/{id}")
+    @GetMapping("/randomCategories/{id}")
     public List<Product> randomCategories(@PathVariable("id") int id) {
         return productService.findByCategoryRandom(id);
     }
@@ -79,7 +79,7 @@ public class ProductController {
         return productService.update(product, id);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") int id) {
         productService.delete(id);
     }

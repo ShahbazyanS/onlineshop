@@ -16,10 +16,10 @@ import java.util.List;
 @Entity
 @Table(name = "orders")
 public class Order {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @OneToMany(cascade = CascadeType.ALL)
     private List<Product> products;
     private LocalDate orderDate;

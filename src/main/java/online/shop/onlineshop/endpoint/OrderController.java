@@ -20,7 +20,7 @@ public class OrderController {
         return orderService.update(order, id);
     }
 
-    @GetMapping("/get_order")
+    @GetMapping("/get")
     public Order get(@AuthenticationPrincipal CurrentUser currentUser){
         int id = currentUser.getUser().getOrder().getId();
         return orderService.get(id);

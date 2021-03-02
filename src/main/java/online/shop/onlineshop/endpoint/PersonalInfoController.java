@@ -20,12 +20,12 @@ public class PersonalInfoController {
         return personalInfoService.update(personalInfo, id);
     }
 
-    @DeleteMapping("/delete{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") int id) {
         personalInfoService.delete(id);
     }
 
-    @GetMapping("/get")
+    @GetMapping("/")
     public PersonalInfo getPI(@AuthenticationPrincipal CurrentUser currentUser) {
         return personalInfoService.getPI(currentUser.getUser().getEmail());
     }

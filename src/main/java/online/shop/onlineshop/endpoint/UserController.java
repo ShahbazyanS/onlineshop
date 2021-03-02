@@ -34,7 +34,7 @@ public class UserController {
 
 
     @PostMapping("/add")
-    public User save(@RequestBody UserDto userDto, Locale locale) throws MessagingException {
+    public ResponseEntity<User> save(@RequestBody UserDto userDto, Locale locale) throws MessagingException {
         if (userDto.getPassword().equals(userDto.getConfirmPassword())) {
             userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
             User user = modelMapper.map(userDto, User.class);
@@ -44,7 +44,7 @@ public class UserController {
             userService.saveUser(user);
             String link = "http://localhost:8080/user/activate?email=" + user.getEmail() + "&token=" + user.getToken();
             emailService.sendHtmlEmil(userDto.getEmail(), "Welcome", user, link, "email/userEmail.html", locale);
-            return user;
+            return ResponseEntity.ok(user);
         }
         return null;
     }
@@ -83,18 +83,18 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public User getUser(@PathVariable("id") int id) {
         return userService.getUser(id);
     }
 
-    @GetMapping("/get")
+    @GetMapping("/")
     public User getUser(@AuthenticationPrincipal CurrentUser currentUser) {
         int id = currentUser.getUser().getId();
         return userService.getUser(id);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable("id") int id) {
         userService.deleteUser(id);
     }

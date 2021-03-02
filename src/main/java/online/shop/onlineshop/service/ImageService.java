@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 
 @Service
-public class ImageService {
+public class ImageService implements ImageServiceImpl{
 
     @Value("${file.upload.dir}")
     private String uploadDir;

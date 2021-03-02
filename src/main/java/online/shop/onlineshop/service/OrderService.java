@@ -10,25 +10,26 @@ import java.time.LocalDate;
 
 @Service
 @RequiredArgsConstructor
-public class OrderService {
+public class OrderService implements OrderServiceImpl{
 
     private final OrderRepository orderRepository;
 
-
-
+    @Override
     public Order save(Order order) {
         return orderRepository.save(order);
     }
 
+    @Override
     public Order update(Order order, int id) {
         LocalDate date = LocalDate.parse("yyyy-mm-dd");
-        Order order1 = orderRepository.findById(id).orElseThrow(
+        Order orderDB = orderRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Order by id " + id + " does not exist"));
-        order1.setOrderDate(date);
-        order1.setProducts(order.getProducts());
-        return order1;
+        order.setId(orderDB.getId());
+        orderDB.setOrderDate(date);
+        return orderDB;
     }
 
+    @Override
     public Order get(int id){
        return orderRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Order by id " + id + " does not exist"));

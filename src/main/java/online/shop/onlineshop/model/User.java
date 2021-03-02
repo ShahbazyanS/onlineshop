@@ -28,10 +28,12 @@ public class User {
     private PersonalInfo personalInfo;
     @OneToOne
     private ShippingInfo shippingInfo;
+
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "shopping_cart_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private ShoppingCart shoppingCart;
+
     @OneToOne
     private Order order;
     private String token;

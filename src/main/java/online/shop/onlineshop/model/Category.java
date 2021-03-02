@@ -23,6 +23,7 @@ public class Category {
     private String name;
     @ManyToOne
     private Category category;
+
     @ManyToMany
     @JoinTable(name = "categories_products",
             joinColumns = {@JoinColumn(name = "categories_id")},

@@ -15,7 +15,7 @@ public class ShoppingCartController {
     private final ShoppingCartService shoppingCartService;
 
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ShoppingCart getOne(@PathVariable("id") int id) {
 
         return shoppingCartService.getOne(id);
