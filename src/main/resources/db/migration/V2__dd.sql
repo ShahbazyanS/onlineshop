@@ -1,0 +1,1 @@
+INSERT INTO `shop_db`.`colors` (`name`) VALUES ('green');
