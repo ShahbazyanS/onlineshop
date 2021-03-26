@@ -14,13 +14,6 @@ public class ShoppingCartController {
 
     private final ShoppingCartServiceImpl shoppingCartService;
 
-
-    @GetMapping("/{id}")
-    public ShoppingCart getOne(@PathVariable("id") int id) {
-
-        return shoppingCartService.getOne(id);
-    }
-
     @PutMapping("/update/{product_id}")
     public ShoppingCart update(@PathVariable(value = "product_id") int productId,
                                @AuthenticationPrincipal CurrentUser user) {

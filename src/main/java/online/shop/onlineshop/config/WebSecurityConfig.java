@@ -46,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //User security config
                 .antMatchers(HttpMethod.GET, "/user/activate").permitAll()
                 .antMatchers(HttpMethod.POST, "/user/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/user/get").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.GET, "/user").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/user/delete").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers(HttpMethod.GET, "/user/**").hasAnyAuthority("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/user/**").hasAnyAuthority("USER", "ADMIN")
@@ -65,8 +65,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE, "/shopping_cart/**").hasAnyAuthority("USER", "ADMIN")
 
                 //Product security config
-                .antMatchers(HttpMethod.POST, "/product/**").hasAnyAuthority("ADMIN")
                 .antMatchers(HttpMethod.GET, "/product/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/product/**").hasAnyAuthority("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/product/**").hasAnyAuthority("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/product/**").hasAnyAuthority("ADMIN")
 
@@ -98,6 +98,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // disable page caching
         http.headers().cacheControl();
+        // for http://localhost:8080/h2-console . you need change scope in runtime
+        http.headers().frameOptions().disable();
     }
 
     @Autowired
@@ -106,6 +108,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder);
     }
+
 
     @Bean
     public PasswordEncoder encoder() {

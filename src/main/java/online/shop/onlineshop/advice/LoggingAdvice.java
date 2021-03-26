@@ -1,6 +1,5 @@
 package online.shop.onlineshop.advice;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -27,8 +26,8 @@ public class LoggingAdvice {
         String methodName = proceedingJoinPoint.getSignature().getName();
         String className = proceedingJoinPoint.getTarget().getClass().toString();
         Object[] array = proceedingJoinPoint.getArgs();
-        log.info("method invoked " + className + " : " + methodName + "()" + "arguments : "
-                + mapper.writeValueAsString(array));
+//        log.info("method invoked " + className + " : " + methodName + "()" + "arguments : "
+//                + mapper.writeValueAsString(array));
         Object object = proceedingJoinPoint.proceed();
         log.info(className + " : " + methodName + "()" + "Response : "
                 + mapper.writeValueAsString(object));
