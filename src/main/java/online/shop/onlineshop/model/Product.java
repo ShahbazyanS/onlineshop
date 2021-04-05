@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
@@ -23,9 +24,11 @@ public class Product {
     private String description;
     private double price;
 
+    @NotNull
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "product")
     private List<Image> images;
 
+    @
     @ManyToMany
     @JoinTable(name = "products_colors",
             joinColumns = {@JoinColumn(name = "products_id")},

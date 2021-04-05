@@ -7,6 +7,7 @@ import online.shop.onlineshop.service.ProductServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -20,7 +21,7 @@ public class ProductController {
 
 
     @PostMapping("/add")
-    public Product save(@RequestBody ProductDto productDto) {
+    public Product save(@Valid @RequestBody ProductDto productDto) {
         Product product = modelMapper.map(productDto, Product.class);
         return productService.saveProduct(product);
     }

@@ -14,8 +14,11 @@
     <name>onlineshop</name>
     <description>Demo project for Spring Boot</description>
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
         <flyway.maven.plugin.version>5.0.7</flyway.maven.plugin.version>
+        <commons.io>2.5</commons.io>
+        <json.web.token>0.7.0</json.web.token>
+        <model.mapper>2.3.0</model.mapper>
     </properties>
     <dependencies>
         <dependency>
@@ -33,12 +36,12 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.5</version>
+            <version>${commons.io}</version>
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
-            <version>0.7.0</version>
+            <version>${json.web.token}</version>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
@@ -95,31 +98,31 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.flywaydb</groupId>
-                <artifactId>flyway-maven-plugin</artifactId>
-                <version>${flyway.maven.plugin.version}</version>
-                <configuration>
-                    <url>jdbc:mysql://localhost:3306/shop_db?verifyservercertificate=false&amp;useSSl=false&amp;useUnicode=yes&amp;characterEncoding=utf8&amp;characterSetResults=utf8</url>
-                    <user>root</user>
-                    <password>root</password>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+<build>
+<plugins>
+    <plugin>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-maven-plugin</artifactId>
+        <version>${flyway.maven.plugin.version}</version>
+        <configuration>
+            <url>jdbc:mysql://localhost:3306/shop_db?verifyservercertificate=false&amp;useSSl=false&amp;useUnicode=yes&amp;characterEncoding=utf8&amp;characterSetResults=utf8</url>
+            <user>root</user>
+            <password>root</password>
+        </configuration>
+    </plugin>
+    <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+            <excludes>
+                <exclude>
+                    <groupId>org.projectlombok</groupId>
+                    <artifactId>lombok</artifactId>
+                </exclude>
+            </excludes>
+        </configuration>
+    </plugin>
+</plugins>
+</build>
 
 </project>
