@@ -7,8 +7,6 @@ public interface ShoppingCartService {
 
     ShoppingCart update(int id, int productId);
 
-    ShoppingCart getOne(int id);
-
     ShoppingCart userCart(User user);
 
     ShoppingCart save(ShoppingCart shoppingCart);

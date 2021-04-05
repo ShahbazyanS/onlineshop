@@ -85,7 +85,13 @@ public class ProductServiceImpl implements ProductService {
     public Product update(Product product, int id) {
         Product productDB = productRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Product with id " + id + " does not exist"));
-        product.setId(productDB.getId());
+        productDB.setName(product.getName());
+        productDB.setDescription(product.getDescription());
+        productDB.setPrice(product.getPrice());
+        productDB.setColors(product.getColors());
+        productDB.setCountries(product.getCountries());
+        productDB.setSizes(product.getSizes());
+        productDB.setImages(product.getImages());
         return productDB;
     }
 

@@ -1,7 +1,6 @@
 package online.shop.onlineshop.service;
 
 import lombok.RequiredArgsConstructor;
-import online.shop.onlineshop.exception.ResourceNotFoundException;
 import online.shop.onlineshop.model.Product;
 import online.shop.onlineshop.model.ShoppingCart;
 import online.shop.onlineshop.model.User;
@@ -29,11 +28,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         return shoppingCartRepository.save(cart);
     }
 
-    @Override
-    public ShoppingCart getOne(int id) {
-        return shoppingCartRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Cart with id " + id + " does not exist"));
-    }
 
     @Override
     public ShoppingCart userCart(User user) {

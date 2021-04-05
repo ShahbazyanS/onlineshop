@@ -4,5 +4,5 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface ImageService {
 
-    void uploadToLocal(MultipartFile file);
+    void save(int id, MultipartFile file);
 }

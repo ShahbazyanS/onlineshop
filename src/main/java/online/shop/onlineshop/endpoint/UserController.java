@@ -25,6 +25,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
     private final UserServiceImpl userService;
@@ -32,6 +33,8 @@ public class UserController {
     private final ModelMapper modelMapper;
     private final JwtTokenUtil jwtTokenUtil;
     private final EmailServiceImpl emailService;
+
+
 
 
     @PostMapping("/add")
@@ -67,7 +70,7 @@ public class UserController {
     public ResponseEntity auth(@RequestBody AuthRequest authRequest) {
         User user = userService.findByEmail(authRequest.getEmail());
         if (user != null) {
-            if (passwordEncoder.matches(authRequest.getPassword(), user.getPassword())) {
+            if (user.isActive() && passwordEncoder.matches(authRequest.getPassword(), user.getPassword())) {
                 String token = jwtTokenUtil.generateToken(user.getEmail());
                 return ResponseEntity.ok(AuthResponse.builder()
                         .token(token)
@@ -89,7 +92,7 @@ public class UserController {
         return userService.getUser(id);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public User getUser(@AuthenticationPrincipal CurrentUser currentUser) {
         int id = currentUser.getUser().getId();
         return userService.getUser(id);

@@ -2,7 +2,6 @@ package online.shop.onlineshop.endpoint;
 
 import lombok.RequiredArgsConstructor;
 import online.shop.onlineshop.model.Category;
-import online.shop.onlineshop.model.Product;
 import online.shop.onlineshop.service.CategoryServiceImpl;
 import online.shop.onlineshop.service.ProductServiceImpl;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,8 +23,5 @@ public class MainController {
         return categoryService.generalCategories();
     }
 
-    @GetMapping("/products")
-    public List<Product> products() {
-        return productService.lastProducts();
-    }
+
 }

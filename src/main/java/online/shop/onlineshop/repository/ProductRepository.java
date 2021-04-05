@@ -51,9 +51,9 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Product> filterByPriceAndCountries(@Param("id") int id,@Param("min") int min, @Param("max") int max);
 
     @Query(value = "SELECT *\n" +
-            "FROM products INNER JOIN categoeries_products\n" +
-            "ON categoeries_products.products_id=products.id\n" +
-            "WHERE categoeries_products.categories_id=:id\n" +
+            "FROM products INNER JOIN categories_products\n" +
+            "ON categories_products.products_id=products.id\n" +
+            "WHERE categories_products.categories_id=:id\n" +
             "AND price>:min AND price<:max", nativeQuery = true)
     List<Product> filterByPriceAndCategories(@Param("id") int id,@Param("min") int min, @Param("max") int max);
 

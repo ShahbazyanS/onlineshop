@@ -16,8 +16,9 @@ public class ImageController {
     private final ImageServiceImpl imageService;
 
     @PostMapping("/upload/local")
-    public void uploadFile(@RequestParam("file") MultipartFile file) {
-        imageService.uploadToLocal(file);
+    public void uploadFile(@RequestParam("productId") int id,
+                           @RequestParam("file") MultipartFile file) {
+        imageService.save(id, file);
     }
 
     @PostMapping("/upload/db")

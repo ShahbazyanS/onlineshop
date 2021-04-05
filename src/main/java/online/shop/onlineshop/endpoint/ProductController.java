@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/products")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ProductController {
 
     private final ProductServiceImpl productService;
@@ -25,7 +26,7 @@ public class ProductController {
         return productService.saveProduct(product);
     }
 
-    @GetMapping("/product/{id}")
+    @GetMapping("/{id}")
     public Product product(@PathVariable("id") int id) {
         return productService.getOne(id);
     }
@@ -50,7 +51,7 @@ public class ProductController {
         return productService.findBySizes(id);
     }
 
-    @GetMapping("/madein/{id}")
+    @GetMapping("/madeIn/{id}")
     public List<Product> findByCountries(@PathVariable("id") int id) {
         return productService.findByCountries(id);
     }
@@ -71,13 +72,18 @@ public class ProductController {
     }
 
     @GetMapping("/search/{word}")
-    public List<Product> filterByCategoriesAndPrice(@PathVariable("word") String word) {
+    public List<Product> findByWords(@PathVariable("word") String word) {
         return productService.searchProduct(word);
     }
 
     @GetMapping("/randomCategories/{id}")
     public List<Product> randomCategories(@PathVariable("id") int id) {
         return productService.findByCategoryRandom(id);
+    }
+
+    @GetMapping("/last")
+    public List<Product> products() {
+        return productService.lastProducts();
     }
 
     @PutMapping("/update/{id}")
